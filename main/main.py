@@ -2,6 +2,7 @@
 import sys
 import os
 import subprocess
+import time
 from pathlib import Path
 
 def cls():
@@ -36,7 +37,7 @@ def mainloop():
 	print("1: Thermal Profile")
 	print("2: Keyboard RGB Timeout")
 	print("3: Battery Limiter")
-	print("4: Fan Speed #not implemented yet")
+	print("4: Fan Speed")
 	print("5: LCD Overdrive")
 	print("6: Keyboard RGB Configuration")
 	print("Q: Quit program")
@@ -91,9 +92,78 @@ while True:
             subprocess.run("echo 0 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/backlight_timeout", shell=True)
         else:
             print("Unknown state. Returning to main menu.")
-            
-            
-            
+            time.sleep(1)
+    elif next_function == "3":
+        cls()
+        current_battery_limit_state = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/battery_limiter").read_text().strip()
+        print("Do you want to enable or disable battery limiter?")
+        if current_battery_limit_state == "1":
+            print("Current state is: Enabled")
+        elif current_battery_limit_state == "0":
+            print("Current state is: Disabled")
+        else:
+            print("Current state unknown")
+        print("1: Enable")
+        print("2: Disable")
+        battery_limit_state = input("Type the number of your choice, then press enter.\n").strip()
+        if battery_limit_state == "1":
+            subprocess.run("echo 1 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/battery_limiter", shell=True)
+        elif battery_limit_state == "2":
+            subprocess.run("echo 0 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/battery_limiter", shell=True)
+        else:
+            print("Unknown state. Returning to main menu.")
+            time.sleep(1)
+    elif next_function == "4":
+        cls()
+        print("Fan speed control")
+        print("Do you want manual or automatic CPU fan control?")
+        print("1: Automatic")
+        print("2: Manual")
+        cpu_automation = input("Type the number of your choice, then press enter.\n").strip()
+        if cpu_automation == "1":
+            print("Automatic CPU fan control selected.\n")
+            cpu_speed = 0
+        elif cpu_automation not in ("1", "2"):
+            print("Unknown state. Returning to main menu.")
+            time.sleep(1)
+            continue
+        elif cpu_automation == "2":
+            VALID_SPEEDS = {str(i) for i in range(1, 101)}
+            cpu_speed = input("Manual CPU fan control selected. Type your desired fan speed. (valid range: 1-100, 1 being the lowest and 100 being max.)\n ").strip()
+            if cpu_speed not in VALID_SPEEDS:
+                print("Invalid input. Please enter a number between 1 and 100. Returning to main menu.\n")
+                time.sleep(1)
+                continue
+                
+        print("Do you want manual or automatic GPU fan control?")
+        print("1: Automatic")
+        print("2: Manual")
+        
+        gpu_automation = input("Type the number of your choice, then press enter.\n").strip()
+        if gpu_automation == "1":
+            print("Automatic GPU fan control selected.\n")
+            gpu_speed = 0
+        elif gpu_automation not in ("1", "2"):
+            print("Unknown state. Returning to main menu.")
+            time.sleep(1)
+            continue
+        elif gpu_automation == "2":
+            gpu_speed = input("Manual GPU fan control selected. Type your desired fan speed. (valid range: 1-100, 1 being the lowest and 100 being max.)\n ").strip()
+            if gpu_speed not in VALID_SPEEDS:
+                print("Invalid input. Please enter a number between 1 and 100. Returning to main menu.\n")
+                time.sleep(1)
+                continue
+        
+        print("Target speeds are:")
+        print(f"CPU Speed: {cpu_speed}")
+        print(f"GPU Speed: {gpu_speed}")
+        areyousurethesespeedsarecorrect = input("Is this correct? y/n").strip().lower()
+        if areyousurethesespeedsarecorrect == "y":
+            subprocess.run(f"echo {cpu_speed},{gpu_speed} | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/fan_speed", shell=True)
+        else:
+            print("Returning to main menu.")
+            time.sleep(1)
+            continue
         
         
         
