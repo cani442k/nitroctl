@@ -11,4 +11,6 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 Work in progress
 
+## AI Usage
+AI was used partially in the creation of this tool, AI generated code snippets were reviewed by humans.
 
