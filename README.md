@@ -5,7 +5,7 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 
 ## Prerequisites
 
-This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) driver. Installation guide of Linuwu-Sense can be found on their repository.
+This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) module. Installation guide of Linuwu-Sense can be found on their repository.
 
 ## Installation
 
