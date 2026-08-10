@@ -43,6 +43,5 @@ make install
 ```
 
 ### Step 2: Install nitroctl
-
 Work in progress
 
