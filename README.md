@@ -1,7 +1,10 @@
 # Nitroctl, a CLI NitroSense alternative for Linux, Made thanks to the linuwu-sense driver.
 
 ## What is this?
-A tool made with Python that lets you change keyboard RGB colors, thermal profiles, battery limiter and more using the Linuwu-Sense driver. Currently, it is meant for Nitro devices only. Distro-agnostic, does not depend on systemd. Tested on Void Linux.
+A tool made with Python that lets you change keyboard RGB colors, thermal profiles, battery limiter and more using the Linuwu-Sense module. Currently, it works on Nitro devices only. Distro-agnostic, does not depend on systemd. Tested on Void Linux.
+
+## Why did I make this?
+[Another tool](https://github.com/PXDiv/Div-Acer-Manager-Max) that does the same thing wouldn't work on Void Linux so i decided to make my own, though mine lacks a GUI and is a bit less user friendly.
 
 ## Prerequisites
 
