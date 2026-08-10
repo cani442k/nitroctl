@@ -59,9 +59,9 @@ def mainloop():
     print("3: Battery Limiter")
     print("4: Fan Speed")
     print("5: LCD Overdrive")
-    print("6: Keyboard RGB Configuration")
+    print("6: Keyboard RGB Configuration [UNIMPLEMENTED]")
     print("S: Save current configuration")
-    print("L: Load configuration from default path")
+    print("L: Load configuration from default path [UNIMPLEMENTED]")
     print("Q: Quit program")
     return input("Type the number of your choice, then press enter.\n").strip()
 while True:
@@ -105,11 +105,11 @@ while True:
         print("Do you want to enable or disable keyboard RGB timeout?")
         current_rgb_state = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/backlight_timeout").read_text().strip()
         if current_rgb_state == "1":
-            print("Current state is: Enabled")
+            print("Current state is: Enabled\n")
         elif current_rgb_state == "0":
-            print("Current state is: Disabled")
+            print("Current state is: Disabled\n")
         else:
-            print("Current state unknown.")
+            print("Current state unknown.\n")
         print("1: Enable")
         print("2: Disable")
         rgb_state = input("Type the number of your choice, then press enter.\n").strip()
@@ -125,11 +125,11 @@ while True:
         current_battery_limit_state = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/battery_limiter").read_text().strip()
         print("Do you want to enable or disable battery limiter?")
         if current_battery_limit_state == "1":
-            print("Current state is: Enabled")
+            print("Current state is: Enabled\n")
         elif current_battery_limit_state == "0":
-            print("Current state is: Disabled")
+            print("Current state is: Disabled\n")
         else:
-            print("Current state unknown")
+            print("Current state unknown\n")
         print("1: Enable")
         print("2: Disable")
         battery_limit_state = input("Type the number of your choice, then press enter.\n").strip()
@@ -191,7 +191,23 @@ while True:
             print("Returning to main menu.")
             time.sleep(1)
             continue
-        
-        
-        
-    
+    elif next_function == "5":
+        cls()
+        print("Do you want to enable or disable LCD Overdrive?")
+        current_overdrive_state = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/lcd_override").read_text().strip()
+        if current_overdrive_state == "1":
+            print("Current state is: Enabled\n")
+        elif current_overdrive_state == "0":
+            print("Current state is: Disabled\n")
+        else:
+            print("Current state unknown\n")
+        print("1: Enabled")
+        print("2: Disabled")
+        overdrive_state = input("Type the number of your choice, then press enter.\n").strip() 
+        if overdrive_state == "1":
+            subprocess.run("echo 1 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/lcd_override", shell=True)
+        elif overdrive_state == "2":
+            subprocess.run("echo 0 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/lcd_override", shell=True)
+        else:
+            print("Unknown state. Returning to main menu.")
+            time.sleep(1)

@@ -9,8 +9,40 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 ## Installation
 
-Work in progress
+### Step 1: Install Linuwu-Sense
 
-## AI Usage
-AI was used partially in the creation of this tool, AI generated code snippets were reviewed by humans.
+First, install headers for your kernel:
+
+For Debian/Ubuntu:
+
+```bash
+sudo apt install -y linux-headers-amd64
+```
+
+For Fedora/RedHat/CentOS:
+
+```bash
+sudo dnf install kernel-devel
+```
+
+For Arch:
+
+```bash
+sudo pacman -S linux-headers
+```
+For Void:
+```bash
+sudo xbps-install -S linux-headers
+```
+After installing headers, clone the Linuwu-Sense repository and install the module:
+
+```bash
+git clone https://github.com/0x7375646F/Linuwu-Sense.git
+cd Linuwu-Sense
+make install
+```
+
+### Step 2: Install nitroctl
+
+Work in progress
 
