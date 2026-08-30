@@ -48,3 +48,8 @@ make install
 ### Step 2: Install nitroctl
 Work in progress
 
+## To Do
+
+* [❌] Keyboard RGB
+* [❌] GUI
+* [✅] ~~Configuration Save/Load function~~
