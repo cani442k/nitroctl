@@ -128,7 +128,7 @@ while True:
         rgb_state = input("Type the number of your choice, then press enter.\n").strip()
         if rgb_state == "1":
             subprocess.run("echo 1 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/backlight_timeout", shell=True)
-        elif rgb_state == "0":
+        elif rgb_state == "2":
             subprocess.run("echo 0 | sudo tee /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense/backlight_timeout", shell=True)
         else:
             print("Unknown state. Returning to main menu.")
