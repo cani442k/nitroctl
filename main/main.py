@@ -9,9 +9,9 @@ from pathlib import Path
 sudo_user = os.environ.get("SUDO_USER")
 real_home = Path(f"/home/{sudo_user}") if sudo_user else Path.home()
 configs_dir = real_home / ".config" / "nitroctl"
+sysfs_path = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense")
 def savecfg():
     configs_dir.mkdir(parents=True, exist_ok=True)
-    sysfs_path = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense")
     for item in sysfs_path.iterdir():
         if item.is_file():
             try:
@@ -21,6 +21,19 @@ def savecfg():
                 dest_file.write_text(content)
                 
                 print(f"Copied {item.name} to {dest_file}")
+            except Exception as e:
+                print(f"Skipped {item.name}: {e}")
+                
+def loadcfg():
+    for item in configs_dir.iterdir():
+        if item.is_file():
+            try:
+                content = item.read_text().strip()
+                
+                dest_file = sysfs_path / item.name
+                dest_file.write_text(content)
+                
+                print(f"Loaded {item.name} to {dest_file}")
             except Exception as e:
                 print(f"Skipped {item.name}: {e}")
     
@@ -40,7 +53,7 @@ def chk_su():
 linuwusense_dir = "/sys/devices/platform/acer-wmi"
 
 if not os.path.exists(linuwusense_dir):
-    print(f"ERROR: Fatal: Driver directory '{linuwusense_dir}' does not exist! Exiting.", file=sys.stderr)
+    print(f"ERROR: Fatal: Driver directory '{linuwusense_dir}' does not exist! Device might not be Acer. Exiting.", file=sys.stderr)
     sys.exit(1)
 
 if os.path.exists(linuwusense_dir):
@@ -61,7 +74,7 @@ def mainloop():
     print("5: LCD Overdrive")
     print("6: Keyboard RGB Configuration [UNIMPLEMENTED]")
     print("S: Save current configuration")
-    print("L: Load configuration from default path [UNIMPLEMENTED]")
+    print("L: Load configuration from default path [UNTESTED, MIGHT BREAK YOUR SYSTEM!]")
     print("Q: Quit program")
     return input("Type the number of your choice, then press enter.\n").strip()
 while True:
@@ -211,3 +224,11 @@ while True:
         else:
             print("Unknown state. Returning to main menu.")
             time.sleep(1)
+    elif next_function.lower() == "l":
+        print(f"Loading previous configuration from {configs_dir}")
+        loadcfg()
+        print("Loading finished.")
+        time.sleep(1)
+        continue
+        
+        
