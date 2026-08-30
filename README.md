@@ -52,4 +52,5 @@ Work in progress
 
 * [❌] Keyboard RGB
 * [❌] GUI
+* [❌] Finish the installation guide
 * [✅] ~~Configuration Save/Load function~~
