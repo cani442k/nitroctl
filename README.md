@@ -76,6 +76,12 @@ sudo xbps-install -S kdialog
 
 After installing kdialog, download the installation script from the releases page and run it.
 
+When installation finishes, you can run nitroctl from your terminal using:
+
+```bash
+nitroctl
+```
+
 ## Manual installation
 
 First, install Linuwu-Sense the same way its done above. Then, proceed with the installation as described below.
