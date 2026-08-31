@@ -29,6 +29,7 @@ if kdialog --yesno "Are you sure you want to install nitroctl?\n This will downl
 	mkdir -p "$HOME/.local/share"
 	cd "$HOME/.local/share"
 	git clone http://github.com/cani442k/nitroctl.git
+	chmod +x "$HOME/.local/share/nitroctl/nitroctl.sh"
 	ln -sf "$HOME/.local/share/nitroctl/nitroctl.sh" "$HOME/.local/bin/nitroctl"
 	kdialog --msgbox "Installation successfully finished. Installed nitroctl to $HOME/.local/share/nitroctl/" --title "Setup"
 else
