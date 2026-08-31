@@ -150,5 +150,6 @@ Run nitroctl:
 
 * [❌] Keyboard RGB
 * [❌] GUI
+* [❌] CPU&GPU Temparatures on main menu
 * [✅] ~~Finish the installation guide~~
 * [✅] ~~Configuration Save/Load function~~
