@@ -5,7 +5,7 @@ if [ -f /etc/os-release ]; then
    . /etc/os-release
 fi
 kdialog --msgbox "Welcome to the nitroctl setup. Click \"OK\" to continue."
-if kdialog --yesno "Dependencies need to be installed in order to use nitroctl.\nClick details for a list of dependencies." "python3 \n python3-pip \n git" --title "Setup"; then
+if kdialog --yesno "Dependencies need to be installed in order to use nitroctl.\nClick details for a list of dependencies. \n" "python3 \n python3-pip \n git" --title "Setup"; then
 
 	if [[ "$ID" == "fedora" || "$ID_LIKE" =~ "fedora" ]]; then
 		pkexec dnf install python3 python3-pip git -y
@@ -28,7 +28,10 @@ if kdialog --yesno "Are you sure you want to install nitroctl?\n This will downl
 	mkdir -p "$HOME/.local/bin"
 	mkdir -p "$HOME/.local/share"
 	cd "$HOME/.local/share"
-	git clone http://github.com/cani442k/nitroctl.git
+	git clone https://github.com/cani442k/nitroctl.git
+	if ! [ -d "$HOME/.local/share/nitroctl" ] && [ "$(ls -A "$HOME/.local/share/nitroctl/")" ]; then
+    kdialog --error "Installation failed. nitroctl couldnt be installed properly.\nCheck your internet connection, then try again." --title "Setup"
+	fi
 	chmod +x "$HOME/.local/share/nitroctl/nitroctl.sh"
 	ln -sf "$HOME/.local/share/nitroctl/nitroctl.sh" "$HOME/.local/bin/nitroctl"
 	kdialog --msgbox "Installation successfully finished. Installed nitroctl to $HOME/.local/share/nitroctl/" --title "Setup"
