@@ -10,7 +10,7 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 
 This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) module. Installation guide of Linuwu-Sense can be found on their repository.
 
-## Installation
+## Installation via setup script
 
 ### Step 1: Install Linuwu-Sense
 
@@ -34,6 +34,7 @@ For Arch:
 sudo pacman -S linux-headers
 ```
 For Void:
+
 ```bash
 sudo xbps-install -S linux-headers
 ```
@@ -46,11 +47,102 @@ make install
 ```
 
 ### Step 2: Install nitroctl
-Work in progress
+
+First, install kdialog, as the installation script depends on it.
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install kdialog
+```
+
+On Fedora/Redhat/CentOS:
+
+```bash
+sudo dnf install kdialog
+```
+
+On Arch:
+
+```bash
+sudo pacman -S kdialog
+```
+
+On Void:
+
+```bash
+sudo xbps-install -S kdialog
+```
+
+After installing kdialog, download the installation script from the releases page and run it.
+
+## Manual installation
+
+First, install Linuwu-Sense the same way its done above. Then, proceed with the installation as described below.
+
+### Step 1: Install dependencies
+
+The required dependencies are python3, python3-pip and git. Package names may be different on your distro. Below are the examples for Debian, Fedora, Arch and Void.
+
+For Debian:
+
+```bash
+sudo apt install python3 python3-pip python-is-python3 git
+```
+
+For Fedora:
+
+```bash
+sudo dnf install python3 python3-pip git
+```
+
+For Arch:
+
+```bash
+sudo pacman -S python python-pip git
+```
+
+For Void:
+
+```bash
+sudo xbps-install -S python3 python3-pip git
+```
+
+### Step 2: Install nitroctl
+
+Navigate to the destination you want to install nitroctl in your terminal. For example:
+
+```bash
+cd ~/your/destination/
+```
+
+Then, clone this repository:
+
+```bash
+git clone http://github.com/cani442k/nitroctl.git
+```
+
+cd into the cloned repository:
+
+```bash
+cd nitroctl
+```
+
+Make nitroctl.sh executable:
+
+```bash
+chmod +x nitroctl.sh
+```
+
+Run nitroctl:
+
+```bash
+./nitroctl.sh
+```
 
 ## To Do
 
 * [❌] Keyboard RGB
 * [❌] GUI
-* [❌] Finish the installation guide
+* [✅] ~~Finish the installation guide~~
 * [✅] ~~Configuration Save/Load function~~
