@@ -125,7 +125,7 @@ cd ~/your/destination/
 Then, clone this repository:
 
 ```bash
-git clone http://github.com/cani442k/nitroctl.git
+git clone https://github.com/cani442k/nitroctl.git
 ```
 
 cd into the cloned repository:
