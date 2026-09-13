@@ -16,6 +16,8 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 ## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
 
+Current version is still v1.1.26, so use the deprecated way until v1.2.26 releases.
+
 ### Step 1: Install Linuwu-Sense
 
 First, install headers for your kernel:
