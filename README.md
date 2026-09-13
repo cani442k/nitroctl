@@ -14,6 +14,78 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 
 This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) module. Installation guide of Linuwu-Sense can be found on their repository.
 
+## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
+
+### Step 1: Install Linuwu-Sense
+
+First, install headers for your kernel:
+
+For Debian/Ubuntu:
+
+```bash
+sudo apt install -y linux-headers-amd64
+```
+
+For Fedora/RedHat/CentOS:
+
+```bash
+sudo dnf install kernel-devel
+```
+
+For Arch:
+
+```bash
+sudo pacman -S linux-headers
+```
+For Void:
+
+```bash
+sudo xbps-install -S linux-headers
+```
+After installing headers, clone the Linuwu-Sense repository and install the module:
+
+```bash
+git clone https://github.com/0x7375646F/Linuwu-Sense.git
+cd Linuwu-Sense
+make install
+```
+
+### Step 2: Install nitroctl
+
+First, install kdialog, as the installation script depends on it.
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install kdialog
+```
+
+On Fedora/Redhat/CentOS:
+
+```bash
+sudo dnf install kdialog
+```
+
+On Arch:
+
+```bash
+sudo pacman -S kdialog
+```
+
+On Void:
+
+```bash
+sudo xbps-install -S kdialog
+```
+
+After installing kdialog, download the installation script from the releases page and run it.
+
+When installation finishes, you can run nitroctl from your terminal using:
+
+```bash
+nitroctl
+```
+
 ## Installation via setup script
 
 ### Step 1: Install kdialog
@@ -109,77 +181,6 @@ Run nitroctl:
 ./nitroctl.sh
 ```
 
-## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
-
-### Step 1: Install Linuwu-Sense
-
-First, install headers for your kernel:
-
-For Debian/Ubuntu:
-
-```bash
-sudo apt install -y linux-headers-amd64
-```
-
-For Fedora/RedHat/CentOS:
-
-```bash
-sudo dnf install kernel-devel
-```
-
-For Arch:
-
-```bash
-sudo pacman -S linux-headers
-```
-For Void:
-
-```bash
-sudo xbps-install -S linux-headers
-```
-After installing headers, clone the Linuwu-Sense repository and install the module:
-
-```bash
-git clone https://github.com/0x7375646F/Linuwu-Sense.git
-cd Linuwu-Sense
-make install
-```
-
-### Step 2: Install nitroctl
-
-First, install kdialog, as the installation script depends on it.
-
-On Debian/Ubuntu:
-
-```bash
-sudo apt install kdialog
-```
-
-On Fedora/Redhat/CentOS:
-
-```bash
-sudo dnf install kdialog
-```
-
-On Arch:
-
-```bash
-sudo pacman -S kdialog
-```
-
-On Void:
-
-```bash
-sudo xbps-install -S kdialog
-```
-
-After installing kdialog, download the installation script from the releases page and run it.
-
-When installation finishes, you can run nitroctl from your terminal using:
-
-```bash
-nitroctl
-```
 
 ## To Do
 
