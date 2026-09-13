@@ -16,6 +16,101 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 ## Installation via setup script
 
+### Step 1: Install kdialog
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install kdialog
+```
+
+On Fedora/Redhat/CentOS:
+
+```bash
+sudo dnf install kdialog
+```
+
+On Arch:
+
+```bash
+sudo pacman -S kdialog
+```
+
+On Void:
+
+```bash
+sudo xbps-install -S kdialog
+```
+### Step 2: Run the installer
+
+Download the latest setup script from releases and run it.
+
+## Manual installation
+
+First, install Linuwu-Sense the same way its done above. Then, proceed with the installation as described below.
+
+### Step 1: Install dependencies
+
+The required dependencies are python3, python3-pip and git. Package names may be different on your distro. Below are the examples for Debian, Fedora, Arch and Void.
+
+For Debian:
+
+```bash
+sudo apt install python3 python3-pip python-is-python3 git
+```
+
+For Fedora:
+
+```bash
+sudo dnf install python3 python3-pip git
+```
+
+For Arch:
+
+```bash
+sudo pacman -S python python-pip git
+```
+
+For Void:
+
+```bash
+sudo xbps-install -S python3 python3-pip git
+```
+
+### Step 2: Install nitroctl
+
+Navigate to the destination you want to install nitroctl in your terminal. For example:
+
+```bash
+cd ~/your/destination/
+```
+
+Then, clone this repository:
+
+```bash
+git clone https://github.com/cani442k/nitroctl.git
+```
+
+cd into the cloned repository:
+
+```bash
+cd nitroctl
+```
+
+Make nitroctl.sh executable:
+
+```bash
+chmod +x nitroctl.sh
+```
+
+Run nitroctl:
+
+```bash
+./nitroctl.sh
+```
+
+## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
+
 ### Step 1: Install Linuwu-Sense
 
 First, install headers for your kernel:
@@ -84,70 +179,6 @@ When installation finishes, you can run nitroctl from your terminal using:
 
 ```bash
 nitroctl
-```
-
-## Manual installation
-
-First, install Linuwu-Sense the same way its done above. Then, proceed with the installation as described below.
-
-### Step 1: Install dependencies
-
-The required dependencies are python3, python3-pip and git. Package names may be different on your distro. Below are the examples for Debian, Fedora, Arch and Void.
-
-For Debian:
-
-```bash
-sudo apt install python3 python3-pip python-is-python3 git
-```
-
-For Fedora:
-
-```bash
-sudo dnf install python3 python3-pip git
-```
-
-For Arch:
-
-```bash
-sudo pacman -S python python-pip git
-```
-
-For Void:
-
-```bash
-sudo xbps-install -S python3 python3-pip git
-```
-
-### Step 2: Install nitroctl
-
-Navigate to the destination you want to install nitroctl in your terminal. For example:
-
-```bash
-cd ~/your/destination/
-```
-
-Then, clone this repository:
-
-```bash
-git clone https://github.com/cani442k/nitroctl.git
-```
-
-cd into the cloned repository:
-
-```bash
-cd nitroctl
-```
-
-Make nitroctl.sh executable:
-
-```bash
-chmod +x nitroctl.sh
-```
-
-Run nitroctl:
-
-```bash
-./nitroctl.sh
 ```
 
 ## To Do
