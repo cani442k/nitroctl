@@ -1,3 +1,7 @@
+
+# WARNING
+The development of nitroctl might slow down for a few months, the main reasons are that i have other things to do and that the screen of the Nitro 16 i use to test new features on failed. I will still try to keep adding new features but they will not be tested and may cause problems.
+
 # Nitroctl, a CLI NitroSense alternative for Linux, Made thanks to the linuwu-sense driver.
 
 ## What is this?
