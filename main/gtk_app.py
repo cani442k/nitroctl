@@ -343,15 +343,20 @@ def ensure_root() -> None:
     Passa --no-elevate para a cópia elevada não tentar se elevar de novo
     (evitaria um loop caso o pkexec não eleve de fato). Também fixa SHELL
     para um valor presente em /etc/shells, porque o pkexec reclama quando
-    o shell do usuário não está listado lá.
+    o shell do usuário não está listado lá, e repassa o display Wayland/X11
+    para o root — sem isso o app elevado não encontra o display e o Gtk
+    falha com "couldn't be initialized".
     """
     if core.is_root():
         return
     script = Path(__file__).resolve()
     try:
         env = dict(os.environ, SHELL="/bin/sh")
+        keep = ("DISPLAY", "WAYLAND_DISPLAY", "XDG_RUNTIME_DIR",
+                "XDG_SESSION_TYPE", "DBUS_SESSION_BUS_ADDRESS")
+        preserved = [f"{key}={env[key]}" for key in keep if env.get(key)]
         subprocess.run(
-            ["pkexec", "env", f"SHELL={env['SHELL']}",
+            ["pkexec", "env", f"SHELL={env['SHELL']}", *preserved,
              sys.executable or "python3", str(script),
              "--no-elevate", *sys.argv[1:]],
             check=False,
