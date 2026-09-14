@@ -52,11 +52,12 @@ class NitroWindow(Adw.ApplicationWindow):
 
         self.toast_overlay = Adw.ToastOverlay()
 
-        page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        page.set_margin_top(12)
-        page.set_margin_bottom(12)
-        page.set_margin_start(12)
-        page.set_margin_end(12)
+        # Respiro entre a janela e o conteúdo (fora) + entre os cartões (dentro).
+        page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=24)
+        page.set_margin_top(24)
+        page.set_margin_bottom(24)
+        page.set_margin_start(24)
+        page.set_margin_end(24)
 
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_child(page)
@@ -91,6 +92,7 @@ class NitroWindow(Adw.ApplicationWindow):
         self.status_label = Gtk.Label()
         self.status_label.set_wrap(True)
         self.status_label.add_css_class("dim-label")
+        self.status_label.set_margin_top(12)
         page.append(self.status_label)
 
         self.refresh()
@@ -112,6 +114,11 @@ class NitroWindow(Adw.ApplicationWindow):
         self.profile_combo.connect("notify::selected", self._on_profile_selected)
         self._profile_updating = False
         group.add(self.profile_combo)
+        # Margem interna do cartão de perfil (o ComboRow é o único filho).
+        self.profile_combo.set_margin_top(12)
+        self.profile_combo.set_margin_bottom(12)
+        self.profile_combo.set_margin_start(12)
+        self.profile_combo.set_margin_end(12)
         return group
 
     def _build_fan_group(self) -> Adw.PreferencesGroup:
@@ -138,7 +145,11 @@ class NitroWindow(Adw.ApplicationWindow):
         apply_button.add_css_class("suggested-action")
         apply_button.set_sensitive(self.can_write)
         apply_button.connect("clicked", self._on_apply_fan_speed)
-        group.add(apply_button)
+        # O botão de ação fica fora do cartão, com respiro acima.
+        apply_button.set_margin_top(12)
+        page_button_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        page_button_box.append(apply_button)
+        group.add(page_button_box)
         return group
 
     def _build_toggle_group(self) -> Adw.PreferencesGroup:
@@ -165,7 +176,8 @@ class NitroWindow(Adw.ApplicationWindow):
         group.set_title("Configuration")
         group.set_description(f"Files saved in {core.config_dir()}")
 
-        buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        buttons.set_margin_top(12)
         save_button = Gtk.Button.new_with_label("Save configuration")
         save_button.add_css_class("suggested-action")
         save_button.set_sensitive(self.can_write)

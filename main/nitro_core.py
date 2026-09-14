@@ -172,8 +172,16 @@ def set_fan_speed(cpu: int, gpu: int) -> None:
 
 
 def user_home() -> Path:
-    """Home do usuário real, mesmo quando o programa roda via sudo."""
+    """Home do usuário real, mesmo quando o programa roda elevado.
+
+    Cobre sudo (SUDO_USER) e pkexec (PKEXEC_UID), que não define SUDO_USER.
+    """
     sudo_user = os.environ.get("SUDO_USER")
+    if not sudo_user and os.environ.get("PKEXEC_UID"):
+        try:
+            sudo_user = pwd.getpwuid(int(os.environ["PKEXEC_UID"])).pw_name
+        except (KeyError, ValueError):
+            sudo_user = None
     if sudo_user:
         try:
             return Path(pwd.getpwnam(sudo_user).pw_dir)
