@@ -12,6 +12,7 @@ módulo compartilhado nitro_core, o mesmo usado pelo CLI.
 """
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -41,15 +42,15 @@ class NitroWindow(Adw.ApplicationWindow):
 
         self.can_write = core.is_root()
 
+        # Adw.ApplicationWindow não aceita set_titlebar: o header vai dentro
+        # de um Adw.ToolbarView, que é o content da janela.
         header = Adw.HeaderBar()
         refresh = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
         refresh.set_tooltip_text("Reload state from the driver")
         refresh.connect("clicked", lambda _button: self.refresh())
         header.pack_end(refresh)
-        self.set_titlebar(header)
 
         self.toast_overlay = Adw.ToastOverlay()
-        self.set_content(self.toast_overlay)
 
         page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         page.set_margin_top(12)
@@ -61,6 +62,11 @@ class NitroWindow(Adw.ApplicationWindow):
         scrolled.set_child(page)
         scrolled.set_vexpand(True)
         self.toast_overlay.set_child(scrolled)
+
+        toolbar_view = Adw.ToolbarView()
+        toolbar_view.add_top_bar(header)
+        toolbar_view.set_content(self.toast_overlay)
+        self.set_content(toolbar_view)
 
         if not self.can_write:
             banner = Adw.Banner.new(
@@ -332,14 +338,24 @@ class NitroApp(Adw.Application):
 
 
 def ensure_root() -> None:
-    """Reexecuta via pkexec quando aberto como usuário comum."""
+    """Reexecuta via pkexec quando aberto como usuário comum.
+
+    Passa --no-elevate para a cópia elevada não tentar se elevar de novo
+    (evitaria um loop caso o pkexec não eleve de fato). Também fixa SHELL
+    para um valor presente em /etc/shells, porque o pkexec reclama quando
+    o shell do usuário não está listado lá.
+    """
     if core.is_root():
         return
     script = Path(__file__).resolve()
     try:
+        env = dict(os.environ, SHELL="/bin/sh")
         subprocess.run(
-            ["pkexec", sys.executable or "python3", str(script), *sys.argv[1:]],
+            ["pkexec", "env", f"SHELL={env['SHELL']}",
+             sys.executable or "python3", str(script),
+             "--no-elevate", *sys.argv[1:]],
             check=False,
+            env=env,
         )
     except FileNotFoundError:
         print(f"pkexec not found; rerun as root: sudo python3 {script}", file=sys.stderr)
@@ -347,10 +363,12 @@ def ensure_root() -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    if "--no-elevate" not in (argv if argv is not None else sys.argv[1:]):
+    args = list(argv if argv is not None else sys.argv[1:])
+    if "--no-elevate" not in args:
         ensure_root()
+    args = [a for a in args if a != "--no-elevate"]
     app = NitroApp()
-    return app.run(sys.argv)
+    return app.run([sys.argv[0], *args])
 
 
 if __name__ == "__main__":
