@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=nitroctl
+GenericName=Notebook fan and power control
+Comment=Control thermal profiles, fan speeds, battery limiter and display settings on Acer Nitro notebooks
+Exec=nitroctl-gui
+Icon=nitroctl
+Terminal=false
+Categories=Settings;HardwareSettings;
+Keywords=nitro;acer;fan;thermal;battery;
+StartupWMClass=nitroctl

@@ -361,7 +361,22 @@ install_nitroctl() {
     done
     ln -sf "$SRC_DIR/nitroctl.sh" "$BIN_DIR/nitroctl"
     ln -sf "$SRC_DIR/nitroctl-gui.sh" "$BIN_DIR/nitroctl-gui"
-    msg "nitroctl instalado em $SRC_DIR, com os comandos 'nitroctl' e 'nitroctl-gui' em $BIN_DIR."
+
+    # Entrada no menu de aplicativos + ícone (modo gráfico).
+    mkdir -p "$HOME/.local/share/applications" "$HOME/.local/share/icons/hicolor/scalable/apps"
+    if [ -f "$SRC_DIR/setup/nitroctl.desktop" ]; then
+        cp "$SRC_DIR/setup/nitroctl.desktop" "$HOME/.local/share/applications/nitroctl.desktop"
+    fi
+    if [ -f "$SRC_DIR/setup/nitroctl.svg" ]; then
+        cp "$SRC_DIR/setup/nitroctl.svg" "$HOME/.local/share/icons/hicolor/scalable/apps/nitroctl.svg"
+    fi
+    if command -v update-desktop-database >/dev/null 2>&1; then
+        update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+    fi
+    if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+        gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
+    fi
+    msg "nitroctl instalado em $SRC_DIR, com os comandos 'nitroctl' e 'nitroctl-gui' em $BIN_DIR e entrada no menu de aplicativos."
 }
 
 install_gui_deps() {
