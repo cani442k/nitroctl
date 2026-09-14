@@ -342,7 +342,17 @@ install_nitroctl() {
         msg "O nitroctl já está em $SRC_DIR; atualizando com git pull."
         git -C "$SRC_DIR" pull --ff-only || { err "Não foi possível atualizar o repositório em $SRC_DIR."; return 1; }
     elif [ -d "$SRC_DIR" ] && [ -n "$(ls -A "$SRC_DIR" 2>/dev/null)" ]; then
-        msg "$SRC_DIR já existe e não é um clone git; usando os arquivos que estão lá, sem atualizar."
+        # Diretório de uma instalação anterior (clone do upstream ou cópia):
+        # sincroniza com a árvore que contém este install.sh, que é a fonte
+        # canônica dos arquivos que as etapas seguintes (dkms.conf, service)
+        # esperam encontrar em $SRC_DIR.
+        msg "$SRC_DIR já existe; sincronizando com a árvore atual."
+        local self_dir
+        self_dir="$(dirname "$(readlink -f "$0")")/.."
+        if [ -d "$self_dir/setup" ] && [ "$self_dir" != "$SRC_DIR" ]; then
+            cp -r "$self_dir/." "$SRC_DIR/" || { err "Não foi possível sincronizar $SRC_DIR."; return 1; }
+            rm -rf "$SRC_DIR/.git"
+        fi
     else
         git clone "$REPO_URL" "$SRC_DIR" || { err "Não foi possível baixar o nitroctl. Verifique a conexão e tente de novo."; return 1; }
     fi
