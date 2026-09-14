@@ -72,6 +72,7 @@ Notes:
 * **LLVM only when needed.** The Clang toolchain is installed only if the running kernel was built with Clang (`CONFIG_CC_IS_CLANG=y`) and `clang` is missing.
 * **Alpine** uses `doas` instead of `sudo` and OpenRC instead of systemd — the driver's systemd unit does not apply there; load the module via `/etc/modules` or `modprobe` after boot.
 * **Gentoo** assumes your kernel sources are already configured; headers come from them.
+* **App grid entry.** The installer writes `~/.local/share/applications/nitroctl.desktop` with an absolute `Exec=` path (`~/.local/bin` is often missing from the graphical launcher's PATH on Debian/Ubuntu/Fedora/openSUSE) plus an hicolor SVG icon, and refreshes the desktop/icon caches when the tools exist (`update-desktop-database`, `gtk-update-icon-cache`). No root needed; works on GNOME, KDE, Xfce, Sway and others following freedesktop.org conventions.
 
 ## Prerequisites
 

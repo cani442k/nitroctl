@@ -363,9 +363,12 @@ install_nitroctl() {
     ln -sf "$SRC_DIR/nitroctl-gui.sh" "$BIN_DIR/nitroctl-gui"
 
     # Entrada no menu de aplicativos + ícone (modo gráfico).
+    # O Exec usa caminho absoluto: ~/.local/bin pode não estar no PATH que
+    # o lançador gráfico enxerga (comum em Debian/Ubuntu, Fedora, openSUSE).
     mkdir -p "$HOME/.local/share/applications" "$HOME/.local/share/icons/hicolor/scalable/apps"
     if [ -f "$SRC_DIR/setup/nitroctl.desktop" ]; then
-        cp "$SRC_DIR/setup/nitroctl.desktop" "$HOME/.local/share/applications/nitroctl.desktop"
+        sed "s|^Exec=nitroctl-gui|Exec=$BIN_DIR/nitroctl-gui|" \
+            "$SRC_DIR/setup/nitroctl.desktop" > "$HOME/.local/share/applications/nitroctl.desktop"
     fi
     if [ -f "$SRC_DIR/setup/nitroctl.svg" ]; then
         cp "$SRC_DIR/setup/nitroctl.svg" "$HOME/.local/share/icons/hicolor/scalable/apps/nitroctl.svg"

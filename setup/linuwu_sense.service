@@ -1,6 +1,11 @@
 [Unit]
 Description=Linuwu-Sense Acer notebook driver
 After=systemd-modules-load.service
+# Caminho absoluto portátil: /usr/bin existe em todas as distros systemd
+# (Debian/Ubuntu/Fedora/openSUSE usam /usr/bin; Arch, /usr/bin via symlink).
+# O systemd resolve Exec* pelo PATH padrão mesmo se o binário estiver em
+# /sbin, então o nome simples é o mais portátil — mantido o absoluto por
+# clareza, com fallback documentado no README (Alpine/OpenRC: modprobe manual).
 
 [Service]
 Type=oneshot
