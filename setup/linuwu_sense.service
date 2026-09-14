@@ -1,0 +1,13 @@
+[Unit]
+Description=Linuwu-Sense Acer notebook driver
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/modprobe -r acer_wmi
+ExecStart=/usr/bin/modprobe linuwu_sense
+ExecStop=/usr/bin/modprobe -r linuwu_sense
+
+[Install]
+WantedBy=multi-user.target
