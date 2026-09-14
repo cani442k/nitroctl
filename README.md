@@ -9,7 +9,7 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 ## Quick install (one-liner)
 
 ```bash
-git clone https://github.com/cani442k/nitroctl.git && cd nitroctl && ./setup/install.sh
+git clone https://github.com/eltonacosta/nitroctl.git && cd nitroctl && ./setup/install.sh
 ```
 
 Non-interactive (accepts every prompt — good for scripts and VMs):
@@ -136,7 +136,7 @@ cd ~/your/destination/
 Then, clone this repository:
 
 ```bash
-git clone https://github.com/cani442k/nitroctl.git
+git clone https://github.com/eltonacosta/nitroctl.git
 ```
 
 cd into the cloned repository:

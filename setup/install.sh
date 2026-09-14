@@ -30,7 +30,7 @@
 set -u
 
 VERSION="2.0.0"
-REPO_URL="https://github.com/cani442k/nitroctl.git"
+REPO_URL="https://github.com/eltonacosta/nitroctl.git"
 DRIVER_URL="https://github.com/0x7375646F/Linuwu-Sense.git"
 SRC_DIR="$HOME/.local/share/nitroctl"
 BIN_DIR="$HOME/.local/bin"
