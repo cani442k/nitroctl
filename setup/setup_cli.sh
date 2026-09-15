@@ -4,6 +4,11 @@ if [ -f /etc/os-release ]; then
    . /etc/os-release
 fi
 
+if [ "$EUID" -eq 0 ]; then
+    echo "ERROR: Fatal: Script detected to be running as root. This will cause a fail in installation. Do not run the script with sudo/doas."
+    exit 1
+fi
+
 echo "Welcome to the nitroctl installer!"
 sleep 1
 read -p "Some dependencies need to be installed in order to use nitroctl. These are python, git and the headers for your kernel. Do you want to install them? Not installing will abort installation. [y/n] " depsconfirm
