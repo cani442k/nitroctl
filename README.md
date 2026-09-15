@@ -18,7 +18,7 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 The GUI setup scripts (setup_kdialog.sh and setup_zenity.sh) require a running Polkit agent. If you dont have one and dont want to set one up, use the CLI script.
 
-## INSTALLATION GUIDE SCHEDULED FOR A REWRITE, FOR THE MEANTIME USE THE MANUAL INSTALLATION METHOD (OR THE CLI SETUP SCRIPT)
+## INSTALLATION GUIDE IS PLANNED FOR A REWRITE, FOR THE MEANTIME USE THE MANUAL INSTALLATION METHOD (OR THE CLI SETUP SCRIPT)
 
 ## Manual installation
 
