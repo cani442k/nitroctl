@@ -14,6 +14,10 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 
 This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) module. The setup script should automatically install Linuwu-Sense and python on versions v1.2.26 and up.
 
+## NOTICE ABOUT INSTALLATION
+
+The GUI setup scripts (setup_kdialog.sh and setup_zenity.sh) require a running Polkit agent. If you dont have one and dont want to set one up, use the CLI script.
+
 ## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
 
 Current version is still v1.1.26, so use the deprecated way until v1.2.26 releases.
