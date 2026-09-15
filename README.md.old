@@ -18,7 +18,110 @@ This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F
 
 The GUI setup scripts (setup_kdialog.sh and setup_zenity.sh) require a running Polkit agent. If you dont have one and dont want to set one up, use the CLI script.
 
-## INSTALLATION GUIDE SCHEDULED FOR A REWRITE, FOR THE MEANTIME USE THE MANUAL INSTALLATION METHOD (OR THE CLI SETUP SCRIPT)
+## DEPRECATED WAY OF INSTALLATION VIA SETUP SCRIPT (For setup script ≤v1.1.26)
+
+Current version is still v1.1.26, so use the deprecated way until v1.2.26 releases.
+
+### Step 1: Install Linuwu-Sense
+
+First, install headers for your kernel:
+
+For Debian/Ubuntu:
+
+```bash
+sudo apt install -y linux-headers-amd64
+```
+
+For Fedora/RedHat/CentOS:
+
+```bash
+sudo dnf install kernel-devel
+```
+
+For Arch:
+
+```bash
+sudo pacman -S linux-headers
+```
+For Void:
+
+```bash
+sudo xbps-install -S linux-headers
+```
+After installing headers, clone the Linuwu-Sense repository and install the module:
+
+```bash
+git clone https://github.com/0x7375646F/Linuwu-Sense.git
+cd Linuwu-Sense
+make install
+```
+
+### Step 2: Install nitroctl
+
+First, install kdialog, as the installation script depends on it.
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install kdialog
+```
+
+On Fedora/Redhat/CentOS:
+
+```bash
+sudo dnf install kdialog
+```
+
+On Arch:
+
+```bash
+sudo pacman -S kdialog
+```
+
+On Void:
+
+```bash
+sudo xbps-install -S kdialog
+```
+
+After installing kdialog, download the installation script from the releases page and run it.
+
+When installation finishes, you can run nitroctl from your terminal using:
+
+```bash
+nitroctl
+```
+
+## Installation via setup script
+
+### Step 1: Install kdialog
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install kdialog
+```
+
+On Fedora/Redhat/CentOS:
+
+```bash
+sudo dnf install kdialog
+```
+
+On Arch:
+
+```bash
+sudo pacman -S kdialog
+```
+
+On Void:
+
+```bash
+sudo xbps-install -S kdialog
+```
+### Step 2: Run the installer
+
+Download the latest setup script from releases and run it.
 
 ## Manual installation
 
