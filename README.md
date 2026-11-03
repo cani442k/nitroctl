@@ -10,6 +10,9 @@ A tool made with Python that lets you change keyboard RGB colors, thermal profil
 ## Why did I make this?
 [Another tool](https://github.com/PXDiv/Div-Acer-Manager-Max) that does the same thing wouldn't work on Void Linux so i decided to make my own, though mine lacks a GUI and is a bit less user friendly.
 
+## AI Usage
+As much as I absolutely despise AI, I did use it a tiny bit for fixing up typos and proper wording in the README. And thats all. I wrote all the code by hand. Nitroctl is not vibe coded. 
+
 ## Prerequisites
 
 This tool depends on python and the [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense) module. The setup script should automatically install Linuwu-Sense and python on versions v1.2.26 and up.
