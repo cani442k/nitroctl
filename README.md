@@ -3,7 +3,8 @@
 I have sold my Acer Nitro laptop. I will add some final patches to nitroctl, then archive the repository for good if i cannot find anyone to do beta testing. I will be working on a GUI in the mean time, but i cannot test new features. If you are willing to test new features, feel free to make an issue about it. If you want to contribute in any way, this would be the best for now.
 
 # Nitroctl, a CLI NitroSense alternative for Linux, Made thanks to the linuwu-sense driver.
-
+## WARNING
+This is the only official source of nitroctl, any other github repositories/websites are completely unofficial and might be spreading malware. Please do not trust anywhere else but https://www.github.com/cani442k/nitroctl.git
 ## What is this?
 A tool made with Python that lets you change keyboard RGB colors, thermal profiles, battery limiter and more using the Linuwu-Sense module. Currently, it works on Nitro devices only. Distro-agnostic, does not depend on systemd. Tested on Void Linux.
 
