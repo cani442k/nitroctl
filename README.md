@@ -1,6 +1,6 @@
 
-# WARNING
-The development of nitroctl might slow down for a few months, the main reasons are that i have other things to do and that the screen of the Nitro 16 i use to test new features on failed. I will still try to keep adding new features but they will not be tested and may cause problems.
+# LOOKING FOR BETA TESTERS
+I have sold my Acer Nitro laptop. I will add some final patches to nitroctl, then archive the repository for good if i cannot find anyone to do beta testing. I will be working on a GUI in the mean time, but i cannot test new features. If you are willing to test new features, feel free to make an issue about it. 
 
 # Nitroctl, a CLI NitroSense alternative for Linux, Made thanks to the linuwu-sense driver.
 
