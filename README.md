@@ -70,5 +70,6 @@ chmod +x nitroctl.sh
 * [❌] CPU&GPU Temparatures on main menu
 * [❌] Write uninstallation script
 * [❌] Write auto-update manager
+* [❌] .desktop file to show up in app launchers
 * [❌] Finish the installation guide
 * [✅] ~~Configuration Save/Load function~~
