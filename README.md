@@ -1,8 +1,10 @@
 # nitroctl, a TUI based NitroSense alternative for Linux, written with Python.
 ## WARNING
 This is the only official source of nitroctl, any other github repositories/websites are completely unofficial and might be spreading malware. Please do not trust anywhere else but https://www.github.com/cani442k/nitroctl.git
+## Want to contribute? I need some beta testers!
+I have recently sold the Acer Nitro 16 I wrote nitroctl for. That does not mean I'm stopping development. Development will continue on the beta branch. If you have an Acer Nitro laptop and want to contribute to this project, now would be the best time to do so, and you don't even need to know how to code. If you want to be a beta tester, just create an issue about it on the repository. Thanks for using nitroctl!
 ## What is nitroctl?
-nitroctl is a TUI utility to configure thermal profiles, battery limiter and more on Acer Nitro laptops using the awesome work of [0x7375646F](https://github.com/0x7375646F) with [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense).
+nitroctl is a TUI utility to configure thermal profiles, battery limiter and more on Acer Nitro laptops (and Acer Nitro laptops only, nitroctl does not work on Acer Predator laptops for now) using the awesome work of [0x7375646F](https://github.com/0x7375646F) with [Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense).
 ## Why did I make nitroctl?
 I made this utility because [another app](https://github.com/PXDiv/Div-Acer-Manager-Max) I used to use required systemd and I wanted to use Void Linux. So I made my own version. Nitroctl lacks a GUI and keyboard RGB configuration (for now) though.
 ## I have been seeing a lot of NitroSense alternatives lately and all of those are Vibecoded (AI generated). Is this one of those?
