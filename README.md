@@ -1,4 +1,4 @@
-# NITROCTL, a TUI based NitroSense alternative for Linux, written with Python.
+# nitroctl, a TUI based NitroSense alternative for Linux, written with Python.
 ## WARNING
 This is the only official source of nitroctl, any other github repositories/websites are completely unofficial and might be spreading malware. Please do not trust anywhere else but https://www.github.com/cani442k/nitroctl.git
 ## What is nitroctl?
