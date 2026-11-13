@@ -3,9 +3,14 @@ clear
 echo "Copyright (C) 2026  cani442k
     This program comes with ABSOLUTELY NO WARRANTY.
     This is free software, and you are welcome to redistribute it
-    under certain conditions."
+    under certain conditions."  
 sleep 2
 clear
+echo "Made with <3"
+sleep 0.5
+clear
+echo "Never vibecoded."
+sleep 0.5
 
 echo "Launching nitroctl..."
 if [ "$EUID" -ne 0 ]; then
