@@ -64,4 +64,5 @@ else
 	echo "nitroctl configuration not found, so not removed."
 fi
 echo "nitroctl uninstallation has completed. If you want to remove Linuwu-Sense too, consult its manual."
+echo "Some temporary files may remain on your system until you reboot."
 exit 0
