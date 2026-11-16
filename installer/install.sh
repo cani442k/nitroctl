@@ -1,11 +1,14 @@
 #!/bin/bash
-
+if [[ $(uname -s) != "Linux" ]]; then
+	echo "ERROR: Fatal: nitroctl is a Linux utility. You must run this script on Linux."
+	exit 1
+fi
 if [ -f /etc/os-release ]; then
    . /etc/os-release
 fi
 
 if [ "$EUID" -eq 0 ]; then
-    echo "ERROR: Fatal: Script detected to be running as root. This will cause a fail in installation. Do not run the script with sudo/doas."
+    echo "ERROR: Fatal: Script detected to be running as root. This will cause a fail in installation. Do not run the script with sudo."
     exit 1
 fi
 
@@ -36,7 +39,7 @@ case "$depsconfirm" in
         exit 1
         ;;
     * )
-        echo "ERROR: Fatal: Invalid choice."
+        echo "ERROR: Fatal: Invalid choice. Installation aborted."
         exit 1
 esac
 sleep 1
@@ -79,10 +82,13 @@ if ! [ -d "$HOME/.local/share/nitroctl" ] || ! [ "$(ls -A "$HOME/.local/share/ni
 echo -e "ERROR: Fatal: Missing files. nitroctl couldnt be installed properly.\nCheck your internet connection, then try again."
 exit 1
 fi
+chmod +x "$HOME/.local/share/nitroctl/installer/install.sh"
+chmod +x "$HOME/.local/share/nitroctl/uninstaller/uninstall.sh"
+chmod +x "$HOME/.local/share/nitroctl/main/main.py"
 chmod +x "$HOME/.local/share/nitroctl/nitroctl.sh"
 ln -sf "$HOME/.local/share/nitroctl/nitroctl.sh" "$HOME/.local/bin/nitroctl"
 echo "Installation successfully finished. No errors reported."
-echo "Installed nitroctl to $HOME/.local/bin/nitroctl"
+echo "Installed nitroctl to $HOME/.local/share/nitroctl"
 echo "You can now run nitroctl from anywhere by running \"nitroctl\" in your terminal."
 sleep 1
 exit 0

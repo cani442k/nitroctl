@@ -6,10 +6,21 @@ import subprocess
 import time
 from pathlib import Path
 
+
 sudo_user = os.environ.get("SUDO_USER")
 real_home = Path(f"/home/{sudo_user}") if sudo_user else Path.home()
 configs_dir = real_home / ".config" / "nitroctl"
 sysfs_path = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense")
+def rmnitroctl():
+    nitroctl_dir = Path(__file__).resolve().parent
+    tempuninstalldir = Path("/tmp/nitroctl/uninstall")
+    print("Making temporary uninstallation directory...")
+    tempuninstalldir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(nitroctl_dir / "uninstaller" / "uninstall.sh", tempuninstalldir / "uninstall.sh")
+    print("Copying uninstallation script to temporary uninstallation directory...")
+    tempuninstaller = "/tmp/nitroctl/uninstall/uninstall.sh"
+    print("Running uninstallation script..")
+    os.execvp("sudo", ["sudo", "-u", sudo_user, "bash", tempuninstaller])
 def savecfg():
     configs_dir.mkdir(parents=True, exist_ok=True)
     for item in sysfs_path.iterdir():
@@ -63,7 +74,7 @@ if not "nitro_sense" in subdirs_of_linuwusense:
     sys.exit(1)
 chk_os()
 chk_su()
-def mainloop():	
+def mainloop(): 
     cls()
     print("Welcome to nitroctl!")
     print("Choose one of the following to continue:")
@@ -72,11 +83,11 @@ def mainloop():
     print("3: Battery Limiter")
     print("4: Fan Speed")
     print("5: LCD Overdrive")
-    print("6: Keyboard RGB Configuration [UNIMPLEMENTED]")
     print("S: Save current configuration")
-    print("L: Load configuration from default path [UNTESTED, MIGHT BREAK YOUR SYSTEM!]")
+    print("L: Load configuration from default path")
     print("Q: Quit program")
-    return input("Type the number of your choice, then press enter.\n").strip()
+    print("R: Uninstall nitroctl [BETA FEATURE]")
+    return input("Type the your choice, then press enter.\n").strip()
 while True:
     next_function = mainloop()
 
@@ -230,5 +241,6 @@ while True:
         print("Loading finished.")
         time.sleep(1)
         continue
-        
-        
+    elif next_function.lower() == "r":
+        print("Preparing to uninstall nitroctl...")
+        rmnitroctl()
