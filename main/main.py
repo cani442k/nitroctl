@@ -11,13 +11,19 @@ sudo_user = os.environ.get("SUDO_USER")
 real_home = Path(f"/home/{sudo_user}") if sudo_user else Path.home()
 configs_dir = real_home / ".config" / "nitroctl"
 sysfs_path = Path("/sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/nitro_sense")
+linuwusense_dir = "/sys/devices/platform/acer-wmi"
+
+
+def cls():
+    subprocess.run(["clear"])
+
 def rmnitroctl():
     nitroctl_dir = Path(__file__).resolve().parent
     tempuninstalldir = Path("/tmp/nitroctl/uninstall")
     print("Making temporary uninstallation directory...")
     tempuninstalldir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(nitroctl_dir / "uninstaller" / "uninstall.sh", tempuninstalldir / "uninstall.sh")
     print("Copying uninstallation script to temporary uninstallation directory...")
+    shutil.copy2(nitroctl_dir / "uninstaller" / "uninstall.sh", tempuninstalldir / "uninstall.sh")
     tempuninstaller = "/tmp/nitroctl/uninstall/uninstall.sh"
     print("Running uninstallation script..")
     os.execvp("sudo", ["sudo", "-u", sudo_user, "bash", tempuninstaller])
@@ -49,8 +55,6 @@ def loadcfg():
                 print(f"Skipped {item.name}: {e}")
     
 
-def cls():
-    subprocess.run(["clear"])
 
 def chk_os():
     if not sys.platform.startswith("linux"):
@@ -61,7 +65,6 @@ def chk_su():
         print("ERROR: Fatal: nitroctl requires root privileges. Exiting.", file=sys.stderr)
         sys.exit(1)
 
-linuwusense_dir = "/sys/devices/platform/acer-wmi"
 
 if not os.path.exists(linuwusense_dir):
     print(f"ERROR: Fatal: Driver directory '{linuwusense_dir}' does not exist! Device might not be Acer. Exiting.", file=sys.stderr)
@@ -103,14 +106,14 @@ while True:
         continue
     elif next_function == "1":
         raw_modes = Path("/sys/firmware/acpi/platform_profile_choices").read_text().split()
-        LABEL_MAP = {
+        thermal_mode_map = {
             "balanced-performance": "Performance",
             "performance": "Turbo",
             "low-power": "Eco",
             "balanced": "Balanced",
             "quiet": "Quiet",
         }
-        display_modes = [LABEL_MAP.get(mode, mode) for mode in raw_modes]
+        display_modes = [thermal_mode_map.get(mode, mode) for mode in raw_modes]
         
         cls()
         print("Available thermal modes:")
@@ -179,9 +182,9 @@ while True:
             time.sleep(1)
             continue
         elif cpu_automation == "2":
-            VALID_SPEEDS = {str(i) for i in range(1, 101)}
+            valid_speeds = {str(i) for i in range(1, 101)}
             cpu_speed = input("Manual CPU fan control selected. Type your desired fan speed. (valid range: 1-100, 1 being the lowest and 100 being max.)\n ").strip()
-            if cpu_speed not in VALID_SPEEDS:
+            if cpu_speed not in valid_speeds:
                 print("Invalid input. Please enter a number between 1 and 100. Returning to main menu.\n")
                 time.sleep(1)
                 continue
@@ -200,7 +203,7 @@ while True:
             continue
         elif gpu_automation == "2":
             gpu_speed = input("Manual GPU fan control selected. Type your desired fan speed. (valid range: 1-100, 1 being the lowest and 100 being max.)\n ").strip()
-            if gpu_speed not in VALID_SPEEDS:
+            if gpu_speed not in valid_speeds:
                 print("Invalid input. Please enter a number between 1 and 100. Returning to main menu.\n")
                 time.sleep(1)
                 continue
